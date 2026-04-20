@@ -7,7 +7,7 @@ import { PdfWorksheetTask } from "@/components/tasks/PdfWorksheetTask";
 import { SelectImageTask } from "@/components/tasks/SelectImageTask";
 import { VoiceTask } from "@/components/tasks/VoiceTask";
 import { WritingTask } from "@/components/tasks/WritingTask";
-import { apiFetch } from "@/lib/api";
+import { apiFetch, getApiBase } from "@/lib/api";
 import { useAuth } from "@/providers/AuthProvider";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
@@ -174,8 +174,7 @@ export default function TaskPage() {
             const fd = new FormData();
             fd.append("file", file);
             fd.append("taskId", task.id);
-            const url = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001";
-            const res = await fetch(`${url}/files/evaluate`, {
+            const res = await fetch(`${getApiBase()}/files/evaluate`, {
               method: "POST",
               headers: { Authorization: `Bearer ${accessToken}` },
               body: fd,

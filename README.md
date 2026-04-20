@@ -11,7 +11,7 @@ Monorepo **pnpm** con **Next.js 15** (PWA), **NestJS 10**, **Supabase** y **Groq
 
 ## Configuración
 
-1. Copia `.env.example` y crea **`apps/web/.env.local`** (variables `NEXT_PUBLIC_*`) y **`apps/api/.env`** (servidor). Opcionalmente un `.env` en la raíz para referencia. Rellena `SUPABASE_JWT_SECRET` desde Supabase → Settings → API → JWT Settings (no uses la anon key).
+1. Copia `.env.example` a **`.env` en la raíz del monorepo** (web y API leen el mismo archivo). Rellena `SUPABASE_JWT_SECRET` desde Supabase → Settings → API → JWT Settings (no uses la anon key).
 2. Aplica las migraciones SQL en Supabase (en orden): [`001_initial.sql`](infra/supabase/migrations/001_initial.sql), luego [`002_task_types_match_select.sql`](infra/supabase/migrations/002_task_types_match_select.sql) (tipos `match_pairs` y `select_image`).
 3. Crea buckets `worksheets` (público lectura) y `submissions` (privado) si no se crearon por la migración.
 4. `pnpm install` (ejecuta `prepare` y compila `packages/*`).

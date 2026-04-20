@@ -1,5 +1,9 @@
+import { config as loadRootEnv } from "dotenv";
 import type { NextConfig } from "next";
+import { resolve } from "node:path";
 import withPWAInit from "@ducanh2912/next-pwa";
+
+loadRootEnv({ path: resolve(__dirname, "../../.env") });
 
 const withPWA = withPWAInit({
   dest: "public",

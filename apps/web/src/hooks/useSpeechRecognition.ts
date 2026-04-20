@@ -8,6 +8,7 @@ export interface UseSpeechRecognitionOptions {
 }
 
 export function useSpeechRecognition(options: UseSpeechRecognitionOptions) {
+  const { lang, onResult } = options;
   const [supported, setSupported] = useState(false);
   const [listening, setListening] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -23,13 +24,13 @@ export function useSpeechRecognition(options: UseSpeechRecognitionOptions) {
     }
     setSupported(true);
     const r = new SR();
-    r.lang = options.lang;
+    r.lang = lang;
     r.continuous = false;
     r.interimResults = true;
     r.onresult = (e: SpeechRecognitionEvent) => {
       const last = e.results[e.results.length - 1];
       const text = last[0]?.transcript ?? "";
-      options.onResult?.(text, last.isFinal);
+      onResult?.(text, last.isFinal);
     };
     r.onerror = () => setError("Speech recognition error");
     r.onend = () => setListening(false);
@@ -41,7 +42,7 @@ export function useSpeechRecognition(options: UseSpeechRecognitionOptions) {
         /* ignore */
       }
     };
-  }, [options.lang, options.onResult]);
+  }, [lang, onResult]);
 
   const start = useCallback(() => {
     const r = recognitionRef.current;

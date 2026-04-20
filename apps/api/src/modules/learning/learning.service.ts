@@ -67,13 +67,13 @@ export class LearningService {
       .eq("user_id", userId)
       .single();
 
-    let strengths = new Set<string>(
+    const strengths = new Set<string>(
       (lp?.strengths as string[] | undefined) ?? [],
     );
-    let weaknesses = new Set<string>(
+    const weaknesses = new Set<string>(
       (lp?.weaknesses as string[] | undefined) ?? [],
     );
-    let weakStreak = (lp?.weak_streak as Record<string, number> | null) ?? {};
+    const weakStreak = (lp?.weak_streak as Record<string, number> | null) ?? {};
     let difficulty = Number(lp?.difficulty_score ?? 1);
     const recent: number[] = Array.isArray(lp?.recent_task_scores)
       ? [...(lp.recent_task_scores as number[])]

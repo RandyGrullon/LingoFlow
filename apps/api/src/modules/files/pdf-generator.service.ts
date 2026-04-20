@@ -15,7 +15,6 @@ export class PdfGeneratorService {
     const { width, height } = page.getSize();
     let y = height - 50;
     const margin = 50;
-    const lineHeight = 14;
 
     const draw = (text: string, size: number, useBold = false) => {
       if (y < margin + 40) {

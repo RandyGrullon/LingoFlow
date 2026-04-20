@@ -106,6 +106,7 @@ Mention if they were correct or what to improve. Score is ${score} (0–1).`,
         {
           role: "user",
           content: `Task type: ${taskType}
+Target language: ${targetLanguage}
 Exercise prompt: ${prompt}
 Student submission: ${JSON.stringify(userAnswer)}`,
         },

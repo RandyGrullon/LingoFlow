@@ -7,8 +7,13 @@
     "dev:web": "pnpm --filter @lingoflow/web dev",
     "dev:api": "pnpm --filter @lingoflow/api dev",
     "build": "pnpm run -r build",
-    "lint": "pnpm run -r lint",
+    "lint": "eslint -c eslint.config.mjs \"packages/prompts/src/**/*.ts\" \"packages/shared-types/src/**/*.ts\" \"apps/api/src/**/*.ts\" && pnpm --filter @lingoflow/web exec next lint",
     "test": "pnpm run -r test"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "eslint": "^9.17.0",
+    "typescript-eslint": "^8.18.1"
   },
   "engines": {
     "node": ">=20"

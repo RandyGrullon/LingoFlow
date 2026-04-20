@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -34,44 +35,57 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="mx-auto flex max-w-md flex-col gap-4 p-8">
-      <h1 className="text-2xl font-bold">Acceso</h1>
-      <p className="text-sm text-slate-500">
-        Usa email y contraseña de tu proyecto Supabase.
-      </p>
-      <input
-        type="email"
-        className="rounded-xl border border-slate-600 bg-transparent px-3 py-2 dark:border-slate-300"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        className="rounded-xl border border-slate-600 bg-transparent px-3 py-2 dark:border-slate-300"
-        placeholder="Contraseña"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      {error ? <p className="text-sm text-red-500">{error}</p> : null}
-      <button
-        type="button"
-        disabled={loading}
-        onClick={() => void submit()}
-        className="rounded-xl bg-brand py-3 font-semibold text-white disabled:opacity-50"
+    <main className="mx-auto flex max-w-md flex-col gap-5 p-8">
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.35 }}
+        className="rounded-3xl border border-primary/20 bg-surface-elevated/60 p-6 shadow-xl shadow-black/20 backdrop-blur-sm dark:bg-surface-elevated/80"
       >
-        {mode === "signin" ? "Entrar" : "Crear cuenta"}
-      </button>
-      <button
-        type="button"
-        className="text-sm text-slate-500 underline"
-        onClick={() => setMode(mode === "signin" ? "signup" : "signin")}
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Acceso</h1>
+        <p className="mt-2 text-sm text-muted-fg">
+          Usa email y contraseña de tu proyecto Supabase.
+        </p>
+        <div className="mt-6 flex flex-col gap-3">
+          <input
+            type="email"
+            className="rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 shadow-inner outline-none transition-shadow focus:border-primary focus:ring-2 focus:ring-primary/30 dark:border-slate-600 dark:bg-slate-950/50 dark:text-white"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            className="rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 shadow-inner outline-none transition-shadow focus:border-primary focus:ring-2 focus:ring-primary/30 dark:border-slate-600 dark:bg-slate-950/50 dark:text-white"
+            placeholder="Contraseña"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        {error ? <p className="mt-3 text-sm text-red-400">{error}</p> : null}
+        <motion.button
+          type="button"
+          disabled={loading}
+          whileTap={{ scale: 0.98 }}
+          onClick={() => void submit()}
+          className="mt-6 w-full rounded-xl bg-primary py-3 font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition-opacity disabled:opacity-50"
+        >
+          {mode === "signin" ? "Entrar" : "Crear cuenta"}
+        </motion.button>
+        <button
+          type="button"
+          className="mt-4 w-full text-sm text-muted-fg underline transition-colors hover:text-primary"
+          onClick={() => setMode(mode === "signin" ? "signup" : "signin")}
+        >
+          {mode === "signin"
+            ? "¿Sin cuenta? Regístrate"
+            : "¿Ya tienes cuenta? Entra"}
+        </button>
+      </motion.div>
+      <Link
+        href="/"
+        className="text-center text-sm text-muted-fg transition-colors hover:text-primary"
       >
-        {mode === "signin"
-          ? "¿Sin cuenta? Regístrate"
-          : "¿Ya tienes cuenta? Entra"}
-      </button>
-      <Link href="/" className="text-center text-sm text-slate-500">
         Volver al inicio
       </Link>
     </main>

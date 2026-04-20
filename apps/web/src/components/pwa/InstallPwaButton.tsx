@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 export function InstallPwaButton() {
@@ -20,9 +21,11 @@ export function InstallPwaButton() {
   if (!visible || !deferred) return null;
 
   return (
-    <button
+    <motion.button
       type="button"
-      className="rounded-lg bg-slate-800 px-3 py-1 text-xs text-white dark:bg-slate-200 dark:text-slate-900"
+      whileHover={{ scale: 1.04 }}
+      whileTap={{ scale: 0.97 }}
+      className="rounded-lg border border-primary/40 bg-primary/15 px-3 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/25 dark:text-primary-muted"
       onClick={async () => {
         await deferred.prompt();
         setVisible(false);
@@ -30,7 +33,7 @@ export function InstallPwaButton() {
       }}
     >
       Instalar app
-    </button>
+    </motion.button>
   );
 }
 

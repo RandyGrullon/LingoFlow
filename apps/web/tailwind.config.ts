@@ -10,9 +10,29 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        brand: {
-          DEFAULT: "#22c55e",
-          dark: "#15803d",
+        primary: {
+          DEFAULT: "#2563eb",
+          foreground: "#ffffff",
+          muted: "#93c5fd",
+          dark: "#1d4ed8",
+        },
+        surface: {
+          DEFAULT: "#0a1628",
+          elevated: "#132238",
+          card: "#1e3a5f",
+        },
+        muted: {
+          DEFAULT: "#64748b",
+          fg: "#94a3b8",
+        },
+      },
+      animation: {
+        float: "float 6s ease-in-out infinite",
+      },
+      keyframes: {
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-4px)" },
         },
       },
     },

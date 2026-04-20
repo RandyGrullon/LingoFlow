@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "Asistencia de idiomas personalizada",
     start_url: "/",
     display: "standalone",
-    background_color: "#0f172a",
-    theme_color: "#22c55e",
+    background_color: "#0a1628",
+    theme_color: "#2563eb",
     icons: [
       {
         src: "/icons/icon-192.png",

@@ -39,7 +39,7 @@ export function SelectImageTask(props: {
           whileTap={{ scale: 0.95 }}
           onClick={speak}
           disabled={props.disabled}
-          className="flex h-14 w-14 items-center justify-center rounded-2xl bg-sky-500 text-2xl text-white shadow-md"
+          className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-2xl text-primary-foreground shadow-md shadow-primary/30"
           aria-label="Escuchar"
         >
           🔊
@@ -65,7 +65,7 @@ export function SelectImageTask(props: {
               whileHover={{ y: -2 }}
               className={`flex min-h-[140px] flex-col items-center justify-center gap-2 rounded-3xl border-2 bg-white p-4 text-center shadow-sm dark:bg-slate-900 ${
                 active
-                  ? "border-orange-400 ring-2 ring-orange-200"
+                  ? "border-primary ring-2 ring-primary/35"
                   : "border-slate-200 dark:border-slate-600"
               }`}
             >
@@ -91,7 +91,7 @@ export function SelectImageTask(props: {
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-center text-xs text-slate-500"
+            className="text-center text-xs text-muted-fg"
           >
             Elige una imagen.
           </motion.p>
@@ -104,7 +104,7 @@ export function SelectImageTask(props: {
         onClick={() => {
           if (selected) props.onSubmit({ optionId: selected });
         }}
-        className="w-full rounded-2xl bg-slate-200 py-4 text-base font-bold text-slate-500 shadow-inner enabled:bg-orange-400 enabled:text-white enabled:shadow-md dark:bg-slate-700 dark:enabled:bg-orange-500"
+        className="w-full rounded-2xl bg-slate-200 py-4 text-base font-bold text-slate-500 shadow-inner enabled:bg-primary enabled:text-primary-foreground enabled:shadow-lg enabled:shadow-primary/30 dark:bg-slate-700 dark:enabled:bg-primary-dark"
       >
         Comprobar
       </motion.button>

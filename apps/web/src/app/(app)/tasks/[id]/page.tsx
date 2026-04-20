@@ -73,18 +73,23 @@ export default function TaskPage() {
 
   return (
     <div className="mx-auto max-w-lg space-y-6">
-      <Link href="/profile" className="text-sm text-brand underline">
+      <Link
+        href="/profile"
+        className="text-sm text-primary underline transition-colors hover:text-primary-dark"
+      >
         ← Volver
       </Link>
-      <h1 className="text-xl font-bold">Tarea</h1>
-      <p className="text-sm text-slate-500">{task.prompt}</p>
+      <h1 className="text-xl font-bold text-slate-900 dark:text-white">Tarea</h1>
+      <p className="text-sm text-muted-fg">{task.prompt}</p>
       {result ? (
-        <div className="rounded-2xl border border-brand/50 bg-brand/10 p-4">
-          <p className="font-semibold">Puntuación: {Math.round(result.score * 100)}%</p>
-          <p className="text-sm">{result.feedback}</p>
+        <div className="rounded-2xl border border-primary/30 bg-primary/10 p-4 dark:bg-primary/15">
+          <p className="font-semibold text-slate-900 dark:text-white">
+            Puntuación: {Math.round(result.score * 100)}%
+          </p>
+          <p className="text-sm text-slate-700 dark:text-slate-200">{result.feedback}</p>
           <button
             type="button"
-            className="mt-4 text-brand underline"
+            className="mt-4 text-primary underline transition-colors hover:text-primary-dark"
             onClick={() => router.push("/profile")}
           >
             Ir al perfil

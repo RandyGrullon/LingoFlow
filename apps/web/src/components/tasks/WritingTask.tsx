@@ -20,24 +20,25 @@ export function WritingTask(props: {
       animate={{ opacity: 1, y: 0 }}
       className="space-y-3"
     >
-      <p className="font-semibold">{props.topic}</p>
-      <p className="text-xs text-slate-500">
+      <p className="font-semibold text-slate-900 dark:text-white">{props.topic}</p>
+      <p className="text-xs text-muted-fg">
         Palabras: {words} (objetivo {props.minWords}–{props.maxWords})
       </p>
       <textarea
-        className="min-h-[140px] w-full rounded-xl border border-slate-600 bg-transparent p-3 text-sm dark:border-slate-300"
+        className="min-h-[140px] w-full rounded-xl border border-slate-300 bg-white p-3 text-sm text-slate-900 shadow-inner outline-none transition-shadow focus:border-primary focus:ring-2 focus:ring-primary/25 dark:border-slate-600 dark:bg-slate-950/50 dark:text-white"
         value={text}
         disabled={props.disabled}
         onChange={(e) => setText(e.target.value)}
       />
-      <button
+      <motion.button
         type="button"
         disabled={props.disabled || words < props.minWords}
+        whileTap={{ scale: 0.99 }}
         onClick={() => props.onSubmit(text)}
-        className="w-full rounded-2xl bg-brand py-3 font-semibold text-white disabled:opacity-40"
+        className="w-full rounded-2xl bg-primary py-3 font-semibold text-primary-foreground shadow-lg shadow-primary/25 disabled:opacity-40"
       >
         Enviar
-      </button>
+      </motion.button>
     </motion.div>
   );
 }

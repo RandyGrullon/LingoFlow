@@ -113,7 +113,7 @@ export function ChatWindow(props: {
   }
 
   return (
-    <div className="flex h-full min-h-[420px] flex-col rounded-2xl border border-slate-700 bg-slate-900/40 dark:border-slate-200 dark:bg-white/60">
+    <div className="flex h-full min-h-[420px] flex-col overflow-hidden rounded-2xl border border-primary/20 bg-surface-elevated/50 shadow-xl shadow-black/20 backdrop-blur-sm dark:bg-surface-elevated/70">
       <div className="flex-1 space-y-2 overflow-y-auto p-4">
         {messages.map((m) => (
           <MessageBubble
@@ -129,7 +129,7 @@ export function ChatWindow(props: {
         {streaming && !partialAssistant ? <TypingIndicator /> : null}
         <div ref={bottomRef} />
       </div>
-      <div className="border-t border-slate-700 p-3 dark:border-slate-200">
+      <div className="border-t border-primary/15 bg-surface/30 p-3 dark:border-primary/25">
         <div className="flex flex-wrap items-center gap-2">
           <VoiceInputButton
             lang={props.speechLang}
@@ -137,7 +137,7 @@ export function ChatWindow(props: {
             onFinal={(t) => setInput((prev) => (prev ? `${prev} ${t}` : t))}
           />
           <input
-            className="min-w-[200px] flex-1 rounded-xl border border-slate-600 bg-transparent px-3 py-2 text-sm dark:border-slate-300"
+            className="min-w-[200px] flex-1 rounded-xl border border-slate-300 bg-white/90 px-3 py-2 text-sm text-slate-900 shadow-inner outline-none transition-shadow focus:border-primary focus:ring-2 focus:ring-primary/25 dark:border-slate-600 dark:bg-slate-950/60 dark:text-white"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Escribe o dicta..."
@@ -147,13 +147,13 @@ export function ChatWindow(props: {
             type="button"
             onClick={() => void handleSend()}
             disabled={streaming}
-            className="rounded-xl bg-brand px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
+            className="rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-md shadow-primary/25 transition-opacity disabled:opacity-50"
           >
             Enviar
           </button>
           <button
             type="button"
-            className="text-xs text-slate-500 underline"
+            className="text-xs text-muted-fg underline transition-colors hover:text-primary"
             onClick={() => {
               const last = [...messages].reverse().find((m) => m.role === "assistant");
               if (last) speak(last.content);

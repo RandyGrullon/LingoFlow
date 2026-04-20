@@ -4,6 +4,7 @@ import { apiFetch } from "@/lib/api";
 import { useAuth } from "@/providers/AuthProvider";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 interface ProfilePayload {
   profile: {
@@ -35,50 +36,62 @@ export default function ProfilePage() {
   }, [accessToken]);
 
   if (loading || !accessToken) {
-    return <p className="p-4">Cargando…</p>;
+    return (
+      <p className="p-4 text-muted-fg motion-safe:animate-pulse">Cargando…</p>
+    );
   }
 
   const p = data?.profile;
   const l = data?.learning;
 
   return (
-    <div className="mx-auto max-w-lg space-y-6">
-      <h1 className="text-2xl font-bold">Perfil de aprendizaje</h1>
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="mx-auto max-w-lg space-y-6"
+    >
+      <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
+        Perfil de aprendizaje
+      </h1>
       {p ? (
-        <section className="rounded-2xl border border-slate-700 p-4 dark:border-slate-200">
-          <p className="text-sm text-slate-500">Idiomas</p>
-          <p>
+        <section className="rounded-2xl border border-primary/20 bg-surface-elevated/60 p-5 shadow-lg shadow-black/10 backdrop-blur-sm dark:bg-surface-elevated/80">
+          <p className="text-sm text-muted-fg">Idiomas</p>
+          <p className="text-slate-900 dark:text-white">
             {p.native_language} → {p.target_language}
           </p>
-          <p className="mt-2 text-sm">
-            Nivel CEFR: <strong>{p.cefr_level}</strong>
+          <p className="mt-2 text-sm text-slate-700 dark:text-slate-200">
+            Nivel CEFR: <strong className="text-primary">{p.cefr_level}</strong>
           </p>
         </section>
       ) : (
-        <p className="text-sm text-slate-500">Sin perfil aún. Chatea para crearlo.</p>
+        <p className="text-sm text-muted-fg">
+          Sin perfil aún. Chatea para crearlo.
+        </p>
       )}
       {l ? (
-        <section className="rounded-2xl border border-slate-700 p-4 dark:border-slate-200">
-          <p className="text-lg font-semibold text-brand">{l.total_xp} XP</p>
-          <p className="text-sm">Racha: {l.streak_days} días</p>
-          <p className="mt-2 text-sm">
+        <section className="rounded-2xl border border-primary/20 bg-surface-elevated/60 p-5 shadow-lg shadow-black/10 backdrop-blur-sm dark:bg-surface-elevated/80">
+          <p className="text-lg font-semibold text-primary">{l.total_xp} XP</p>
+          <p className="text-sm text-slate-700 dark:text-slate-200">
+            Racha: {l.streak_days} días
+          </p>
+          <p className="mt-2 text-sm text-slate-700 dark:text-slate-200">
             Dificultad: {Number(l.difficulty_score).toFixed(2)}×
           </p>
           <div className="mt-4">
-            <p className="text-xs font-semibold uppercase text-slate-500">
+            <p className="text-xs font-semibold uppercase text-muted-fg">
               Fortalezas
             </p>
-            <ul className="list-inside list-disc text-sm">
+            <ul className="list-inside list-disc text-sm text-slate-800 dark:text-slate-200">
               {(l.strengths ?? []).map((s) => (
                 <li key={s}>{s}</li>
               ))}
             </ul>
           </div>
           <div className="mt-4">
-            <p className="text-xs font-semibold uppercase text-slate-500">
+            <p className="text-xs font-semibold uppercase text-muted-fg">
               Debilidades
             </p>
-            <ul className="list-inside list-disc text-sm">
+            <ul className="list-inside list-disc text-sm text-slate-800 dark:text-slate-200">
               {(l.weaknesses ?? []).map((s) => (
                 <li key={s}>{s}</li>
               ))}
@@ -89,11 +102,11 @@ export default function ProfilePage() {
       <div>
         <Link
           href="/chat"
-          className="text-brand underline"
+          className="font-medium text-primary underline transition-colors hover:text-primary-dark"
         >
           Ir al chat
         </Link>
       </div>
-    </div>
+    </motion.div>
   );
 }

@@ -103,7 +103,7 @@ export function MatchPairsTask(props: {
       <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100">
         {props.instruction}
       </h2>
-      <p className="text-xs text-slate-500">
+      <p className="text-xs text-muted-fg">
         Atajo: 1–{Math.min(props.left.length, 9)} columna izquierda; 6–9 y 0
         columna derecha (hasta 5 pares).
       </p>
@@ -129,9 +129,9 @@ export function MatchPairsTask(props: {
                 whileTap={{ scale: 0.98 }}
                 className={`flex w-full items-center gap-2 rounded-2xl border px-3 py-3 text-left text-sm shadow-sm transition ${
                   paired
-                    ? "border-emerald-400 bg-emerald-50 dark:bg-emerald-950/40"
+                    ? "border-primary bg-primary/10 dark:bg-primary/20"
                     : active
-                      ? "border-sky-500 bg-sky-50 ring-2 ring-sky-300 dark:bg-sky-950/40"
+                      ? "border-primary bg-primary/10 ring-2 ring-primary/40 dark:bg-primary/15"
                       : "border-slate-200 bg-white dark:border-slate-600 dark:bg-slate-900"
                 }`}
               >
@@ -161,7 +161,7 @@ export function MatchPairsTask(props: {
                 whileTap={{ scale: 0.98 }}
                 className={`flex w-full items-center gap-2 rounded-2xl border px-3 py-3 text-left text-sm shadow-sm transition ${
                   usedBy
-                    ? "border-emerald-400 bg-emerald-50 dark:bg-emerald-950/40"
+                    ? "border-primary bg-primary/10 dark:bg-primary/20"
                     : "border-slate-200 bg-white dark:border-slate-600 dark:bg-slate-900"
                 }`}
               >
@@ -180,7 +180,7 @@ export function MatchPairsTask(props: {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="text-center text-sm text-sky-600"
+            className="text-center text-sm text-primary dark:text-primary-muted"
           >
             Elige la pareja en la columna derecha.
           </motion.p>
@@ -201,7 +201,7 @@ export function MatchPairsTask(props: {
           props.onSubmit({ matches });
         }}
         whileHover={{ scale: allPaired ? 1.01 : 1 }}
-        className="w-full rounded-2xl bg-slate-200 py-4 text-base font-bold text-slate-700 shadow-inner transition enabled:bg-orange-400 enabled:text-white enabled:shadow-md dark:bg-slate-700 dark:text-slate-200 enabled:dark:bg-orange-500"
+        className="w-full rounded-2xl bg-slate-200 py-4 text-base font-bold text-slate-700 shadow-inner transition enabled:bg-primary enabled:text-primary-foreground enabled:shadow-lg enabled:shadow-primary/30 dark:bg-slate-700 dark:text-slate-200 enabled:dark:bg-primary-dark"
       >
         Comprobar
       </motion.button>

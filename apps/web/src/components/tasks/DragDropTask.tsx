@@ -25,8 +25,8 @@ function DraggableItem(props: { id: string; label: string }) {
       {...listeners}
       {...attributes}
       type="button"
-      className={`rounded-xl border border-slate-600 bg-slate-800/60 px-3 py-2 text-sm dark:border-slate-300 ${
-        isDragging ? "opacity-70" : ""
+      className={`rounded-xl border border-primary/30 bg-surface-elevated/90 px-3 py-2 text-sm text-slate-900 shadow-sm dark:text-slate-100 ${
+        isDragging ? "opacity-70 ring-2 ring-primary/40" : ""
       }`}
     >
       {props.label}
@@ -39,11 +39,11 @@ function DroppableSlot(props: { id: string; label: string; filled?: string }) {
   return (
     <div
       ref={setNodeRef}
-      className={`min-h-[48px] rounded-xl border-2 border-dashed px-3 py-2 text-sm ${
-        isOver ? "border-brand" : "border-slate-500"
+      className={`min-h-[48px] rounded-xl border-2 border-dashed px-3 py-2 text-sm text-slate-800 transition-colors dark:text-slate-200 ${
+        isOver ? "border-primary bg-primary/10" : "border-slate-400 dark:border-slate-500"
       }`}
     >
-      <span className="block text-xs text-slate-500">{props.label}</span>
+      <span className="block text-xs text-muted-fg">{props.label}</span>
       {props.filled ?? "—"}
     </div>
   );
@@ -90,7 +90,7 @@ export function DragDropTask(props: {
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-slate-500">
+      <p className="text-sm text-muted-fg">
         Arrastra cada elemento a la categoría correcta.
       </p>
       <DndContext sensors={sensors} onDragEnd={onDragEnd}>
@@ -110,14 +110,15 @@ export function DragDropTask(props: {
           ))}
         </div>
       </DndContext>
-      <button
+      <motion.button
         type="button"
         disabled={props.disabled}
+        whileTap={{ scale: 0.99 }}
         onClick={submit}
-        className="w-full rounded-2xl bg-brand py-3 font-semibold text-white disabled:opacity-40"
+        className="w-full rounded-2xl bg-primary py-3 font-semibold text-primary-foreground shadow-lg shadow-primary/25 disabled:opacity-40"
       >
         Enviar
-      </button>
+      </motion.button>
     </div>
   );
 }
